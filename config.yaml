@@ -1,0 +1,20 @@
+AppPort:
+  PORT: 8080
+ServiceHttp:
+  HOST: "localhost"
+  PORT: 8083
+ServiceGrpc:
+  HOST: "localhost"
+  PORT: 50051
+CircuitBreaker:
+  failureThreshold: "1"
+  successThreshold: "5"
+  timeout: "55"
+EntryPoints:
+  address: "localhost"
+  http:
+    domains:
+        main:
+            - "8081"
+            - "8082"
+            - "8083"

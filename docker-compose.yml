@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  gateway:
+    build:
+      context: .
+      dockerfile: context/gateway/Dockerfile
+    depends_on:
+      - service1_mock_1
+    ports:
+      - "9090:9090"
+    networks:
+      - my_network
+
+  service1_mock_1:
+    build:
+      context: .
+      dockerfile: context/service1/Dockerfile
+    ports:
+      - "8081:8081"
+      - "8082:8082"
+      - "8083:8083"
+    networks:
+      - my_network
+
+#  service2_mock:
+#    build:
+#      context: .
+#      dockerfile: /context/service2/Dockerfile
+#    ports:
+#      - "50051:50051"
+
+networks:
+  my_network:
+    driver: bridge
