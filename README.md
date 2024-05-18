@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project consists of a gateway service and two mock services: `service1_mock` (HTTP) and `service2_mock` (gRPC). The gateway service provides reverse proxy, load balancing, and circuit breaker functionalities.
+This project consists of a gateway service and two mock services: `service1_mock` (HTTP) and `service2_mock` (gRPC). The gateway service provide load balancing, and circuit breaker functionalities.
 
 ## Running the Project
 
@@ -34,7 +34,7 @@ This project consists of a gateway service and two mock services: `service1_mock
 
 ### Accessing the Services
 
-- **Gateway Service**: `http://localhost:8080`
+- **Gateway Service**: `http://localhost:9090`
 - **Service1 Mock Instances**:
     - `http://localhost:8081`
     - `http://localhost:8082`
@@ -47,11 +47,7 @@ The gateway service serves as the entry point for all incoming requests. It perf
 
 ### Load Balancer
 
-The load balancer distributes incoming HTTP requests across multiple instances of `service1_mock`. This ensures an even distribution of traffic and improves fault tolerance and scalability.
-
-### Reverse Proxy
-
-The reverse proxy forwards client requests to the appropriate backend service. It hides the details of the backend services from the clients and provides a single point of entry.
+The load balancer distributes incoming HTTP requests across multiple instances of `service1_mock` using a round-robin algorithm. This ensures an even distribution of traffic, improving fault tolerance and scalability. Each instance of `service1_mock` receives an equal share of requests, maximizing resource utilization and minimizing response time.
 
 ### Circuit Breaker
 

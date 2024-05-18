@@ -49,7 +49,7 @@ func NewService(
 		servers = append(servers, cb)
 	}
 	return &ServiceImpl{
-		loadBalancer: domain.NewLoadBalancerLogger(domain.NewLoadBalancer(servers)),
+		loadBalancer: domain.NewRoundRobinLoadBalancerLogger(domain.NewRoundRobinLoadBalancer(servers)),
 		infra:        infra,
 	}
 }

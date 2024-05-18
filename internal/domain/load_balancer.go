@@ -11,20 +11,20 @@ type LoadBalancer interface {
 	Select(ctx context.Context) (Server, error)
 }
 
-type loadBalancerImpl struct {
+type roundRobinLoadBalancer struct {
 	mu      sync.Mutex
 	servers []Server
 	current int
 }
 
-func NewLoadBalancer(servers []Server) LoadBalancer {
-	return &loadBalancerImpl{
+func NewRoundRobinLoadBalancer(servers []Server) LoadBalancer {
+	return &roundRobinLoadBalancer{
 		servers: servers,
 		current: 0,
 	}
 }
 
-func (lb *loadBalancerImpl) Select(ctx context.Context) (Server, error) {
+func (lb *roundRobinLoadBalancer) Select(ctx context.Context) (Server, error) {
 	lb.mu.Lock()
 	defer lb.mu.Unlock()
 
@@ -54,17 +54,17 @@ func (lb *loadBalancerImpl) Select(ctx context.Context) (Server, error) {
 	return server, nil
 }
 
-type loadBalancerImplLogger struct {
+type roundRobinLoadBalancerLogger struct {
 	base LoadBalancer
 }
 
-func NewLoadBalancerLogger(base LoadBalancer) LoadBalancer {
-	return &loadBalancerImplLogger{
+func NewRoundRobinLoadBalancerLogger(base LoadBalancer) LoadBalancer {
+	return &roundRobinLoadBalancerLogger{
 		base: base,
 	}
 }
 
-func (l loadBalancerImplLogger) Select(ctx context.Context) (Server, error) {
+func (l roundRobinLoadBalancerLogger) Select(ctx context.Context) (Server, error) {
 	server, err := l.base.Select(ctx)
 	if err != nil {
 		fmt.Printf("LoadBalancer: Select error: %s\n", err)
