@@ -16,8 +16,8 @@ This project consists of a gateway service and two mock services: `service1_mock
 1. **Clone the repository**:
 
     ```sh
-    git clone https://github.com/your-repo/myproject.git
-    cd myproject
+    git clone https://github.com/sina-haseli/gateway.git
+    cd gateway
     ```
 
 2. **Build the Docker images**:
@@ -40,6 +40,10 @@ This project consists of a gateway service and two mock services: `service1_mock
     - `http://localhost:8082`
     - `http://localhost:8083`
 - **Service2 Mock (gRPC)**: `localhost:50051`
+- **All Endpoints**:
+   - `http://localhost:9090/components`
+   - `http://localhost:9090/grpc`
+
 
 ## Gateway Service
 
